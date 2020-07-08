@@ -1,0 +1,24 @@
+{
+    "rest-client.previewOption": "exchange",
+    "rest-client.environmentVariables": {
+        "$shared": {},
+        "CloudSandbox": {
+            "username": "arandazzo",
+            "password" : "jDotzgMuuv5e3+J2uv3Qa88Wtje62O/+yUGahpN/8nY=",
+            "tenantId": "e80ac07d-c63e-410d-9451-d1cef205c65e",
+            "environment": "Sandbox",
+            "baseurl": "https://api.businesscentral.dynamics.com/v2.0",
+            "api": "api/V1.0",
+            "OData": "ODataV4",
+            "notificationurl": "https://74.99.176.11:8083/BC365MVC/Subscription/Notification",
+            "APIPublisher": "greatLakesDental",
+            "APIGroup": "webAPI",
+            "APIVersion": "v1.0"
+        }
+    }
+   // Adding Unchase OData Connected Service to the project failed: Failed to access the metadata document. 
+   //The OData service requires authentication for accessing it. 
+   //Please download the metadata, store it into a local file, and set the value of “MetadataDocumentUri” in the .odata.config file to the file path. 
+   //After that, run custom tool again to generate the OData Client code.
+
+}

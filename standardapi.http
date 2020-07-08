@@ -1,0 +1,223 @@
+### entities ###
+GET {{baseurl}}/{{tenantId}}/{{environment}}/{{api}}
+Authorization: Basic {{username}} {{password}} 
+
+### metadata ###
+GET {{baseurl}}/{{tenantId}}/{{environment}}/{{api}}/$metadata
+Authorization: Basic {{username}} {{password}} 
+
+
+### All companies ###
+# @name allCompanies
+GET {{baseurl}}/{{tenantId}}/{{environment}}/{{api}}/companies
+Authorization: Basic {{username}} {{password}} 
+
+###
+
+### Get CompanyId ###
+# @name getCompanyid
+GET {{baseurl}}/{{tenantId}}/{{environment}}/{{api}}/companies?$filter=name eq 'My Company' 
+Authorization: Basic {{username}} {{password}} 
+
+### 
+@cid = {{getCompanyid.response.body.value[0].id}}
+
+###
+### customers ###
+# @name customers
+GET {{baseurl}}/{{tenantId}}/{{environment}}/{{api}}/companies({{cid}})/customers
+Authorization: Basic {{username}} {{password}} 
+
+###
+### shipmentMethods ###
+# @name shipmentMethods
+GET {{baseurl}}/{{tenantId}}/{{environment}}/{{api}}/companies({{cid}})/shipmentMethods
+Authorization: Basic {{username}} {{password}} 
+
+###
+
+### salesOrders ###
+# @name salesOrders
+GET {{baseurl}}/{{tenantId}}/{{environment}}/{{api}}/companies({{cid}})/salesOrders?$filter=customerId eq a89a1142-aa25-4879-a4d8-cd5e6a357fd1&$expand=salesOrderLines
+Authorization: Basic {{username}} {{password}} 
+
+###
+
+### dimensions ###
+# @name dimensions
+GET {{baseurl}}/{{tenantId}}/{{environment}}/{{api}}/companies({{cid}})/customers(fc9f7ff8-9e1a-ea11-a813-000d3a560b8f)/defaultDimensions
+Authorization: Basic {{username}} {{password}} 
+
+###
+
+### dimensionValues ###
+# @name dimensionValues
+GET {{baseurl}}/{{tenantId}}/{{environment}}/{{api}}/companies({{cid}})/dimensionValues
+Authorization: Basic {{username}} {{password}} 
+
+###
+
+### dimensionLines ###
+# @name dimensionLines
+GET {{baseurl}}/{{tenantId}}/{{environment}}/{{api}}/companies({{cid}})/dimensionLines(627bb355-9dfa-49d9-bfb2-4a7e0dbe93b7)
+Authorization: Basic {{username}} {{password}} 
+
+###
+
+### subscriptions ###
+# @name subscriptions
+GET {{baseurl}}/{{tenantId}}/{{environment}}/api/microsoft/runtime/beta/companies({{cid}})/webhookSupportedResources
+Authorization: Basic {{username}} {{password}} 
+
+###
+
+###  CreateSubscription ###
+# @name CreateSubscription
+POST  {{baseurl}}/{{tenantId}}/{{environment}}/{{api}}/subscriptions
+Authorization: Basic {{username}} {{password}} 
+Content-Type: application/json
+If-Match: *
+
+{
+  "notificationUrl": "{{notificationurl}}",
+  "resource":  "{{baseurl}}/{{tenantId}}/{{environment}}/{{api}}}}/companies({{cid}})/customers",
+  "clientState": "test" 
+}
+###
+GET https://{businesscentralPrefix}/api/microsoft/runtime/beta/companies({{cid})/webhookSupportedResources?$filter=resource eq 'v1.0*' 
+Content-type: application/json
+
+###
+
+get  https://api.businesscentral.dynamics.com/V2.0/92226e37-ba60-4082-93d0-8a400023c938/sandbox/api/V1.0/companies({{cid}})/customers?$expand=defaultDimensions 
+Authorization: Basic {{username}} {{password}} 
+
+###
+
+### Custom Entities ###
+
+### customEntities ###
+GET {{baseurl}}/{{tenantId}}/{{environment}}/api/{{APIPublisher}}/{{APIGroup}}/{{APIVersion}}
+Authorization: Basic {{username}} {{password}} 
+
+### customMetadata ###
+GET {{baseurl}}/{{tenantId}}/{{environment}}/api/{{APIPublisher}}/{{APIGroup}}/{{APIVersion}}/$metadata
+Authorization: Basic {{username}} {{password}} 
+
+### customers ###
+GET {{baseurl}}/{{tenantId}}/{{environment}}/api/{{APIPublisher}}/{{APIGroup}}/{{APIVersion}}/companies({{cid}})/customers(fc9f7ff8-9e1a-ea11-a813-000d3a560b8f)?$expand=defaultDimensions
+Authorization: Basic {{username}} {{password}} 
+
+### items ###
+GET {{baseurl}}/{{tenantId}}/{{environment}}/api/{{APIPublisher}}/{{APIGroup}}/{{APIVersion}}/companies({{cid}})/items
+Authorization: Basic {{username}} {{password}} 
+
+### salesOrders ###
+GET {{baseurl}}/{{tenantId}}/{{environment}}/api/{{APIPublisher}}/{{APIGroup}}/{{APIVersion}}/companies({{cid}})/salesOrders
+Authorization: Basic {{username}} {{password}} 
+
+### salesOrderLines ###
+GET {{baseurl}}/{{tenantId}}/{{environment}}/api/{{APIPublisher}}/{{APIGroup}}/{{APIVersion}}/companies({{cid}})/salesOrders?$filter=number eq '101507'&$expand=salesOrderLines
+Authorization: Basic {{username}} {{password}} 
+
+###
+
+###  CreateSalesOrder ###
+# @name CreateSalesOrder
+POST  {{baseurl}}/{{tenantId}}/{{environment}}/api/{{APIPublisher}}/{{APIGroup}}/{{APIVersion}}/companies({{cid}})/salesOrders
+Authorization: Basic {{username}} {{password}} 
+Content-Type: application/json
+
+{
+  "externalDocumentNumber": "000018482",
+  "customerNumber": "C0000036",
+  "currencyCode": "USD",
+  "shippingPostalAddress": {
+    "street": "6101 Chapel Hill Blvd Ste 203",
+    "city": "Plano",
+    "state": "TX",
+    "countryLetterCode": "US"
+  },
+  "salesOrderCommentLines": [
+    {
+      "date": "2020-07-08",
+      "comment": "this is a test comment",
+      "printOnCreditMemo": false,
+      "printOnInvoice": true,
+      "printOnOrderConfirmation": false,
+      "printOnPickTicket": true,
+      "printOnQuote": true,
+      "printOnReturnAuthorization": false,
+      "printOnReturnReceipt": false,
+      "printOnShipment": false
+    }
+  ],
+  "salesOrderLines": [
+    {
+      "accountId": "09056b12-208f-425f-8112-7387ae12bf02",
+      "lineType": "Account",
+      "quantity": 1,
+      "unitPrice": 13.81,
+      "description": "Freight - UPS - UPS Ground"
+    },
+    {
+      "itemId": "57746d6c-1e1d-ea11-a815-000d3a8c167d",
+      "lineType": "Item",
+      "quantity": 2,
+      "unitPrice": 17.5,
+      "discountAmount": 0
+    }
+  ],
+  "status": "Draft",
+  "shippingAgentCode": "UPS PROD",
+  "shippingAgentServiceCode": "GND"
+}
+###
+
+###  CreateCustomer ###
+# @name CreateCustomer
+POST  {{baseurl}}/{{tenantId}}/{{environment}}/api/{{APIPublisher}}/{{APIGroup}}/{{APIVersion}}/companies({{cid}})/customers?$expand=defaultDimensions
+Authorization: Basic {{username}} {{password}} 
+Content-Type: application/json
+
+{
+"displayName":"Dave Summers",
+"type":"Company",
+"address":{
+"street":"1733 S Milford Rd",
+"city":"Highland",
+"state":"MI",
+"countryLetterCode":"US",
+"postalCode":"48357"
+},
+"phoneNumber":"248-887-3300",
+"email":"drallaindds@gmail.com",
+"defaultDimensions": [
+    {
+      "tableId": 18,
+      "dimensionId": "940566f6-a3c0-43ed-b8b6-0460eee655fa",
+      "dimensionValueId": "60a5aaf4-dde7-4186-aa11-05f10b02a875",
+      "postingValidation": " "
+    },
+    {
+      "tableId": 18,
+      "dimensionId": "489224f0-605b-4a45-8282-08911986a05d",
+      "dimensionValueId": "d0a82c0d-211c-4281-aac1-44e5105a4d86",
+      "postingValidation": " "
+    },
+    {
+      "tableId": 18,
+      "dimensionId": "98978162-8c5b-444c-a0d9-13d823257d76",
+      "dimensionValueId": "005d4c4a-63d5-454e-9be0-190eaec8c8ab",
+      "postingValidation": " "
+    },
+    {
+      "tableId": 18,
+      "dimensionId": "020f0a67-c0d6-4f5b-9466-29fd4b0913a4",
+      "dimensionValueId": "41e08c9c-32a4-4664-a647-5bd74858d5b5",
+      "postingValidation": " "
+    }
+  ]
+}
+
+###
