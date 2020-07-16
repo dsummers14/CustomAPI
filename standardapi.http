@@ -112,8 +112,9 @@ Authorization: Basic {{username}} {{password}}
 GET {{baseurl}}/{{tenantId}}/{{environment}}/api/{{APIPublisher}}/{{APIGroup}}/{{APIVersion}}/companies({{cid}})/items
 Authorization: Basic {{username}} {{password}} 
 
+
 ### salesOrders ###
-GET {{baseurl}}/{{tenantId}}/{{environment}}/api/{{APIPublisher}}/{{APIGroup}}/{{APIVersion}}/companies({{cid}})/salesOrders
+GET {{baseurl}}/{{tenantId}}/{{environment}}/api/{{APIPublisher}}/{{APIGroup}}/{{APIVersion}}/companies({{cid}})/salesOrders(740baaf5-10c2-ea11-a813-000d3a989fed)?$expand=salesOrderCommentLines
 Authorization: Basic {{username}} {{password}} 
 
 ### salesOrderLines ###
@@ -169,9 +170,8 @@ Content-Type: application/json
     }
   ],
   "status": "Draft",
-  "shippingAgentCode": "UPS PROD",
-  "shippingAgentServiceCode": "GND"
 }
+
 ###
 
 ###  CreateCustomer ###
@@ -218,6 +218,56 @@ Content-Type: application/json
       "postingValidation": " "
     }
   ]
+}
+
+### Get salesOrderCommentLines ###
+GET {{baseurl}}/{{tenantId}}/{{environment}}/api/{{APIPublisher}}/{{APIGroup}}/{{APIVersion}}/companies({{cid}})/salesOrderCommentLines('Order','101581',0,10000)
+Authorization: Basic {{username}} {{password}} 
+
+###
+
+### Post salesOrderCommentLines ###
+POST {{baseurl}}/{{tenantId}}/{{environment}}/api/{{APIPublisher}}/{{APIGroup}}/{{APIVersion}}/companies({{cid}})/salesOrderCommentLines
+Authorization: Basic {{username}} {{password}} 
+Content-Type: application/json
+
+{
+      "documentType": "Order",
+      "no": "101581",
+      "documentLineNo": 0,
+      "lineNo": 0,
+      "date": "2020-07-10",
+      "code": "",
+      "comment": "Line 50000",
+      "printOnCreditMemo": false,
+      "printOnInvoice": false,
+      "printOnOrderConfirmation": false,
+      "printOnPickTicket": false,
+      "printOnQuote": false,
+      "printOnReturnAuthorization": false,
+      "printOnReturnReceipt": false,
+      "printOnShipment": false
+}
+
+###
+### salesOrderHeaders ###
+# @name getSaleOrderHeader
+GET {{baseurl}}/{{tenantId}}/{{environment}}/api/{{APIPublisher}}/{{APIGroup}}/{{APIVersion}}/companies({{cid}})/salesOrderHeaders('Order','101530')
+Authorization: Basic {{username}} {{password}} 
+
+###
+@etag3 = {{getSaleOrderHeader.response.headers.}}
+###
+
+### Put salesOrderHeaders ###
+PUT   {{baseurl}}/{{tenantId}}/{{environment}}/api/{{APIPublisher}}/{{APIGroup}}/{{APIVersion}}/companies({{cid}})/salesOrderHeaders('Order','101530')
+Authorization: Basic {{username}} {{password}} 
+Content-Type: application/json
+If-Match: *
+
+{
+  "shippingAgentCode": "UPS",
+  "shippingAgentServiceCode": "GND"
 }
 
 ###
