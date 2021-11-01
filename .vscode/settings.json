@@ -3,15 +3,19 @@
     "rest-client.environmentVariables": {
         "$shared": {},
         "CloudSandbox": {
-            "username": "arandazzo",
-            "password" : "jDotzgMuuv5e3+J2uv3Qa88Wtje62O/+yUGahpN/8nY=",
-            "tenantId": "e80ac07d-c63e-410d-9451-d1cef205c65e",
-            "environment": "Sandbox",
+         /*    "username": "DSUMMERS",
+            "password" : "O/GrFWS7Ud4+0gpzijykPg32rncFkei2BhBWxExrxoA=",
+            "tenantId": "92226e37-ba60-4082-93d0-8a400023c938", */
+            "username": "lsummers",
+            "password" : "88u8+aVJNvKbzI/oEtpS5CWXHwIRn7uieRKVC51ns7U=", 
+          /*  "guR1qPKU/HXX7SXXPO+2xA5doXK/HaTzAUy8upqd3W8=", */
+            "tenantId": "591ea9f6-b6bf-4ff6-8dda-d94b536669ee",
+            "environment": "Training2_Sandbox",
             "baseurl": "https://api.businesscentral.dynamics.com/v2.0",
-            "api": "api/V1.0",
+            "api": "api/V2.0",
             "OData": "ODataV4",
             "notificationurl": "https://74.99.176.11:8083/BC365MVC/Subscription/Notification",
-            "APIPublisher": "greatLakesDental",
+            "APIPublisher": "lescoDistributing",
             "APIGroup": "webAPI",
             "APIVersion": "v1.0"
         }
